@@ -205,6 +205,6 @@ def quickSort(data):
 + worst case
 ![image](https://user-images.githubusercontent.com/94096054/144385696-e0fa8353-23d3-4b13-8b4d-96f343e805cc.png)
 
-
-
-
+- 해결방법:
+> pivot을 random으로 선택하여 사용
+> Paranoid 퀵정렬 사용(split 비율이 1:9 보다 치우친다면 다시 pivot을 선택하여 split)
