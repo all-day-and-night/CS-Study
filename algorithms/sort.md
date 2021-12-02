@@ -88,7 +88,7 @@ O(N^2)
 - 최악의 경우
 배열이 역순으로 정렬되어 있을 경우
 
-+code
++ code
 ```
 def bubbleSort(x):
 	length = len(x)-1
