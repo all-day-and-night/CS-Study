@@ -111,12 +111,13 @@ def bubbleSort(x):
 3. 부분리스트가 하나만 남도록 반복해서 병합하여 정렬된 리스트를 생성한다.
 4. 재귀함수(recursion) 사용
 
+
 + 장점
 시간 복잡도가 O(N log N)이다
 
 
 + 시간복잡도
-O(N^2)
+O(N log N)
 
 + code
 ```
@@ -179,6 +180,8 @@ def merge_sort(data):
 + 장점
 시간 복잡도가 O(N log N)이다
 
++ 단점
+리스트가 이미 정렬되어 있을 경우 분할이 불균형하게 되어 시간복잡도가 O(N^2)가 될 수 있음
 
 + 시간복잡도
 O(N log N)
@@ -198,3 +201,11 @@ def quickSort(data):
 
     return quickSort(left) + [pivot] + quickSort(right)
 ```
+
++ worst case
+![image](https://user-images.githubusercontent.com/94096054/144385696-e0fa8353-23d3-4b13-8b4d-96f343e805cc.png)
+
++ nice case
+![image](https://user-images.githubusercontent.com/94096054/144385751-a8fc9736-5575-44f3-a823-40dacd3f71c9.png)
+
+
