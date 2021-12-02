@@ -161,6 +161,8 @@ def merge_sort(data):
     return merge(left1, right1)
 ```
 
++ recursion tree
+![image](https://user-images.githubusercontent.com/94096054/144385116-7ead8c97-dd43-475e-ad1d-81b946a81657.png)
 
 
 
