@@ -2,6 +2,6 @@
 insertion sort
 </br>
 
-###insertion sort
+### insertion sort
 
--insertion sort
+- insertion sort
