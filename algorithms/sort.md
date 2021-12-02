@@ -205,7 +205,6 @@ def quickSort(data):
 + worst case
 ![image](https://user-images.githubusercontent.com/94096054/144385696-e0fa8353-23d3-4b13-8b4d-96f343e805cc.png)
 
-+ nice case
-![image](https://user-images.githubusercontent.com/94096054/144385751-a8fc9736-5575-44f3-a823-40dacd3f71c9.png)
+
 
 
