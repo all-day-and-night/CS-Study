@@ -1,7 +1,6 @@
-<br>
-insertion sort
-</br>
+Sorting Algorithms
+==================
 
 ### insertion sort
 
-- insertion sort
+
