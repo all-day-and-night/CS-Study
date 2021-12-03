@@ -83,6 +83,7 @@ void add_hash_data(Node** hashTable, int key, int m){
 - h(k) = ((A * K) mod 2 ^ w) right shift (w - r)
 - A : 2 ^ (w-1) < A < 2 ^ w
 
+
 4. Open addressing
 - chaining과 다르게 한 슬롯에 들어갈 수 있는 엔트리가 하나인 해시 테이블
 - 해시 함수로 얻은 주소가 아닌 다른 주소에 데이터를 저장할 수 있도록 허용
@@ -98,12 +99,71 @@ void add_hash_data(Node** hashTable, int key, int m){
 
 - code
 ```
-
+void linear_insert(int *table, int value){
+    int key;
+    int i = 0;
+    while(1){
+        key = ((value % M) + i) % M;
+        if(table[key] == -1){
+            table[key] = value;
+            break;
+        }
+        i++;
+        cnt++;
+    }
+}
 ```
 
-
 + Quadratic probing
+
+- Linear probing과 비슷하지만 고정폭이 제곱수로 늘어나는 특징을 갖고 있다
+- 여러 개의 서로 다른 키들이 동일한 초기 해시값을 갖는 secondary clustering에 취약
+
+- code
+```
+void quad_insert(int *table, int value){
+    int key;
+    int i=0;
+    while(1){
+        key = ((value % M) + i * 1 + 3 * i * i) % M;
+        if(table[key] == -1){
+            table[key] = value;
+            break;
+        }
+        i++;
+    }
+}
+```
+
 + Double hashing
+
+- 탐사할 해시값의 규칙성을 없애서 clustering 방지
+- 최초의 해시값을 얻는 해시 함수 + 충돌이 일어났을 때 탐사 이동폭을 얻는 해시함수
+- 최초의 해시값이 같더라도 탐사 이동폭이 달라지기 때문에 primary, secondary clustering 모두 완화
+- h(k, i) = (h1(k) + i * h2(k)) mod m
+
+- code
+```
+void double_insert(int *table, int value){
+    int key;
+    int i=0;
+    while(1){
+        key = ((value % M) + i * (value % (M-1))) % M;
+        if(table[key] == -1){
+            table[key] = value;
+            break;
+        } 
+        i++;
+    }
+}
+```
+
++ 계산 복잡성
+
+<br>
+open addressing은 chaining과 달리 해시 테이블의 크기가 고정되어 있어 n개 데이터를 모두 저장하려는 경우 
+Load Factor α=n/m 는 1과 같거나 작다고 가정한다.(즉 open addressing은 해시 테이블에 데이터가 가득 차지 않는다는 것을 전제한다)
+
 
 
 
