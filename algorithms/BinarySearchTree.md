@@ -87,6 +87,7 @@ class Tree:
             return False
             
         else:
+            #case 1 자식 노드가 없을 경우
             if self.curNode.left == None and self.curNode.right==None:
                 if value < self.parent.value:
                     self.parent.left = None
@@ -94,7 +95,7 @@ class Tree:
                     self.parent.right = None
                 del self.curNode
                 return True
-                
+            #case 2 자식 노드가 하나만 존재할 경우
             elif self.curNode.left == None and self.curNode.right != None:
                 #왼쪽
                 if value < self.parent.value:
@@ -113,7 +114,7 @@ class Tree:
                 del self.curNode
                 return True
             
-            #2개의 leaf node 가지고 있을 때
+            #case 3 2개의 leaf node 가지고 있을 때
             elif self.curNode.right != None and self.curNode.left != None: # case3
                 if value < self.parent.value:  # case 3-1 left node
                     self.changeNode = self.curNode.right
@@ -172,13 +173,95 @@ class Tree:
 - 3가지 경우
 > 노드 X의 오른쪽 트리가 존재할 경우 오른쪽 트리의 최소값
 
-> 오른쪽 부트리가 없는 경우 어떤 노드 y의 왼쪽 트리의 최대값이 x가 되는 경우 y의  
+> 오른쪽 부트리가 없는 경우 어떤 노드 y의 왼쪽 트리의 최대값이 x가 되는 경우 y의 값
 
-                
+> 그런 노드가 모두 존재하지 않을 경우 Successor도 존재하지 않음
+
+
+2. Predecessor
+
+- Successor의 반대의 경우
+- key[x] 보다 작으면서 가장 큰 노드
+
+
++ find minimun
+
+- 최소값은 항상 가장 왼쪽 노드에 존재
+```
+def tree_minimum(x):
+    while x->left != NIL:
+        x = x->left
+    return x
+```
+
++ find maximum
+
+- 최대값은 항상 가장 오른쪽 노드에 존재
+```
+def tree_maximum(x):
+    while x->right != NIL
+        x = x->right
+    return x
+    
+```
+
++ Successor
+```
+def tree_Successor(x):
+    if x->right != NIL:
+        return tree_minimun(x->right)
+    y = x->parent
+    while y != NIL and x == y->right:
+        x = y
+        y = y->parent
+    return y
+```
++ Predecessor
+```
+def tree_Predecessor(x):
+    if x->left != NIL:
+        return tree_maximum(x->left)
+    y = x->parent
+    while y != NIL and x == y->left:
+        x = y
+        y = y->parent
+    return y
+```
+#### Functions
+          
 1. Search
 
 ![image](https://user-images.githubusercontent.com/94096054/144621577-2cc301fb-a339-4c06-859c-4d4d06ab64f6.png)
 
 > 왼쪽 자식 노드는 부모 노드보다 작고 오른쪽 자식 노드는 부모 노드보다 큰 점을 활용하여 탐색을 한다
+
+![image](https://user-images.githubusercontent.com/94096054/144626363-5f346823-ad40-4490-83b8-0f227160b0e5.png)
+
+
+2. Insert
+
+> 노드를 삽입할 위치를 찾고 노드를 생성 후 추가한다
+
+> leaf node에 추가하기 때문에 노드의 값을 비교 후 leaf 노드를 찾고 추가한다
+
+3. Delete
+
+> BST 구현중 가장 까다롭다
+
+> 3가지 case로 나뉜다
+
+- case1:
+
+> 지울려는 노드의 자식이 없는 경우 그대로 삭제
+
+- case2:
+
+> 지울려는 노드의 자식이 1명 있는 경우(left or right)
+
+> 왼쪽일 경우 자식의 부모와 왼쪽 자식을 이어주고 오른쪽일 경우 자식의 부모와 오른쪽 자식을 이어주면 된다
+
+- case3:
+
+> 자신의 왼쪽 자식 트리에서 가장 큰 노드(Predecessor) or 자신의 오른쪽 노드에서 가장 작은 노드(Successor)를 선택하여 지우고 그 값을 삭제할 노드에 할당
 
 
