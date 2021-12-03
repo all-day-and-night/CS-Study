@@ -163,6 +163,15 @@ void double_insert(int *table, int value){
 <br>
 open addressing은 chaining과 달리 해시 테이블의 크기가 고정되어 있어 n개 데이터를 모두 저장하려는 경우 
 Load Factor α=n/m 는 1과 같거나 작다고 가정한다.(즉 open addressing은 해시 테이블에 데이터가 가득 차지 않는다는 것을 전제한다)
+</br>
+
+- chaining
+
+- expected number of probes:  1 / (1 - α)
+
+- open addressing
+
+- expected number of probes: (1 / α) * ln(1 / (1 - α))
 
 
 
