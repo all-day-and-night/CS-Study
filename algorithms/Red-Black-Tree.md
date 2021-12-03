@@ -70,6 +70,41 @@ rbTree* new_rbTree() {
 
 1. Insertion
 
+```
+void insert(rbTree *t, int data) {
+    Node *z = new_Node(data);
+    Node* y = t->NIL; 
+    Node* x = t->root;
+
+    while(x != t->NIL) {
+        y = x;
+        if(z->data < x->data)
+            x = x->left;
+        else if(z->data > x->data){
+            x = x->right;
+        }
+        else{
+            return ;
+        }
+            
+    }
+    z->parent = y;
+
+    if(y == t->NIL) { 
+        t->root = z;
+    }
+    else if(z->data < y->data) 
+        y->left = z;
+    else
+        y->right = z;
+
+    z->right = t->NIL;
+    z->left = t->NIL;
+
+    insertion_fixup(t, z);
+}
+```
+
 > 새로 생성되는 노드의 색은 항상 빨강(Red)이며 예외적으로 루트 노드만 검정(Black)이다.
 
 > 삽입 상태에서 규칙을 위반하는 경우는 신규 노드가 삽입되고 Red 노드가 연속으로 2개 나타날 경우이다.
@@ -141,6 +176,61 @@ void rightRotate(rbTree *t, Node *x) {
   x->parent = y;
 }
 ```
+
++ Insertion Fix up
+> 위 두가지 case에 해당된다면 노드 삽입 이후 fix
+
+```
+void insertion_fixup(rbTree *t, Node *z) {
+  while(z->parent->color == 'R') {
+    if(z->parent == z->parent->parent->left) { //z.parent is the left child
+
+      Node *y = z->parent->parent->right; //uncle of z
+
+      if(y->color == 'R') { //case 1
+        z->parent->color = 'B';
+        y->color = 'B';
+        z->parent->parent->color = 'R';
+        z = z->parent->parent;
+      }
+      else { //case2 or case3
+        if(z == z->parent->right) { //case2
+          z = z->parent; //marked z.parent as new z
+          leftRotate(t, z);
+        }
+      //case3
+        z->parent->color = 'B'; //made parent 'B'
+        z->parent->parent->color = 'R'; //made parent 'R'
+        rightRotate(t, z->parent->parent);
+      }
+    }
+    else { //z.parent is the right child
+      Node *y = z->parent->parent->left; //uncle of z
+
+      if(y->color == 'R') {
+        z->parent->color = 'B';
+        y->color = 'B';
+        z->parent->parent->color = 'R';
+        z = z->parent->parent;
+      }
+      else {
+        if(z == z->parent->left) {
+          z = z->parent; //marked z.parent as new z
+          rightRotate(t, z);
+        }
+        z->parent->color = 'B'; //made parent 'B'
+        z->parent->parent->color = 'R'; //made parent 'R'
+        leftRotate(t, z->parent->parent);
+      }
+    }
+  } 
+  t->root->color = 'B';
+}
+```
+
+
+
+
 
 
 
