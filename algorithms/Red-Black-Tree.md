@@ -81,10 +81,66 @@ rbTree* new_rbTree() {
 
 - Reconstruct
 
-= left-rotation
+![image](https://user-images.githubusercontent.com/94096054/144634155-193288b4-b5ff-451a-bb9f-6172697951ab.png)
 
-= right-rotation
 
++ left-rotation
+```
+void leftRotate(rbTree *t, Node *x) {
+  Node *y = x->right;
+  x->right = y->left;
+  
+  if(y->left != t->NIL) {
+    y->left->parent = x;
+  }
+  y->parent = x->parent;
+  
+  if(x->parent == t->NIL) { //x is root
+    t->root = y;
+  }
+  else if(x == x->parent->left) { //x is left child
+    x->parent->left = y;
+  }
+  
+  else { //x is right child
+    x->parent->right = y;
+  }
+  
+  y->left = x;
+  x->parent = y;
+}
+```
+
++ right-rotation
+
+```
+
+void rightRotate(rbTree *t, Node *x) {
+  Node *y = x->left;  
+  x->left = y->right;
+  
+  if(y->right != t->NIL) {
+    y->right->parent = x;
+  }
+  
+  y->parent = x->parent;
+  
+  if(x->parent == t->NIL) { //x is root
+    t->root = y;
+  }
+  
+  else if(x == x->parent->right) { //x is left child
+    x->parent->right = y;
+  }
+  
+  else { //x is right child
+    x->parent->left = y;
+  }
+  
+  y->right = x;
+  x->parent = y;
+}
+```
 
 
 
