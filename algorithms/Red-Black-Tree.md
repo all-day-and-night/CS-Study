@@ -109,12 +109,23 @@ void insert(rbTree *t, int data) {
 
 > 삽입 상태에서 규칙을 위반하는 경우는 신규 노드가 삽입되고 Red 노드가 연속으로 2개 나타날 경우이다.
 
-> 이때 Case는 2가지로 나뉜다
+- 이때 Case는 3가지로 나뉜다
 
-+ case1: 부모 노드가 Red인데, 부모 노드의 형제가 없거나 Black 일 때 (Reconstruct)
-+ case2: 부모 노드가 Red인데, 부모 노드의 형제가 Red 일 때 (Recoloring)
++ case1: 부모 노드가 Red인데, 부모 노드의 형제가 Red 일 때 (Recoloring)
++ case2: 부모 노드가 Red인데, 부모 노드의 형제가 없거나 Black 일 때, 자기 자신은 오른쪽 자식 노드 (Reconstruct)
++ case3: 부모 노드가 Red인데, 부모 노드의 형제가 없거나 Black 일 때, 자기 자신은 왼쪽 자식 노드 (Reconstruct)
+
+> 위 case를 고려하여 트리의 구조를 변경하고 변경 후 위 case에 위반되는 경우가 생기지 않을 때까지 반복한다 
+
+- Recoloring
+
+> case 1일 때 부모 노드와 부모 노드의 형제 노드를 Black으로 Recoloring 후 할아버지 노드를 Red로 Recoloring한다   
+
+![image](https://user-images.githubusercontent.com/94096054/144698276-681781e7-83fa-428b-b2c1-d4c69904653b.png)
 
 - Reconstruct
+
+> case 2일 때 삽입된 노드와 부모노드를 Left-rotate를 하고 부모 노드와 할아버지 노드를 Right-rotate한다 
 
 ![image](https://user-images.githubusercontent.com/94096054/144634155-193288b4-b5ff-451a-bb9f-6172697951ab.png)
 
