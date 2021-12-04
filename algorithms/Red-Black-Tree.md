@@ -121,11 +121,22 @@ void insert(rbTree *t, int data) {
 
 > case 1일 때 부모 노드와 부모 노드의 형제 노드를 Black으로 Recoloring 후 할아버지 노드를 Red로 Recoloring한다   
 
+> 만약 할아버지 노드가 루트노드라면 Black으로 바꾼다
+
 ![image](https://user-images.githubusercontent.com/94096054/144698276-681781e7-83fa-428b-b2c1-d4c69904653b.png)
 
 - Reconstruct
 
-> case 2일 때 삽입된 노드와 부모노드를 Left-rotate를 하고 부모 노드와 할아버지 노드를 Right-rotate한다 
+> case 2일 때 부모노드를 Black으로 할아버지 노드를 Red로 Recoloring 한다. 삽입된 노드와 부모노드를 Left-rotate를 하고 부모 노드와 할아버지 노드를 Right-rotate한다. 
+
+> case 3일 때 부모노드를 Black으로 할아버지 노드를 Red로 Recoloring한다. 삽입된 노드의 부모노드와 할아버지 노드를 Right-rotate한다. 
+
+> 이 때의 조건은 부모 노드가 할아버지 노드의 왼쪽 자식 노드일 경우이다. 반대로 부모 노드가 할아버지 노드의 오른쪽 자식일 경우 오른쪽, 왼쪽을 반대로 수행하면 된다.
+
+![image](https://user-images.githubusercontent.com/94096054/144698448-58bf335f-bee8-433d-a775-ff3c2f3d4f22.png)
+
+
++ Rotate
 
 ![image](https://user-images.githubusercontent.com/94096054/144634155-193288b4-b5ff-451a-bb9f-6172697951ab.png)
 
@@ -239,6 +250,22 @@ void insertion_fixup(rbTree *t, Node *z) {
 }
 ```
 
+- 시간 복잡도
+
+> 각 시행은 모두 O(1)의 시간이 소요되지만 노드가 삽입될 위치를 찾는데 O(log N)의 시간이 소요되므로 insert의 시간 복잡도는 O(log N)이다.
+
+
+
+
+2. Deletion
+
+> 삭제할 노드의 색깔에 따라 경우가 트리 구조를 바꾸는 방법이 다르다.
+
+- Red :
+
+> 만약 삭제할 노드가 자식 노드를 가지고 있지 않을 경우 그래도 삭제하면 된다.
+
+> 자식 노드를 가지고 있을 경우 
 
 
 
