@@ -52,7 +52,7 @@ def sol(str1, str2):
     for i in range(1, len1+1):
         for j in range(1, len2+1):
             if str1[i-1] != str2[j-1]:
-                mat[i][j] = max(mat[i-1][j], mat[i-1][j-1], mat[i][j-1])
+                mat[i][j] = max(mat[i-1][j], mat[i][j-1])
             else:
                 mat[i][j] = mat[i-1][j-1] + 1
     for m in mat:
