@@ -259,13 +259,193 @@ void insertion_fixup(rbTree *t, Node *z) {
 
 2. Deletion
 
-> 삭제할 노드의 색깔에 따라 경우가 트리 구조를 바꾸는 방법이 다르다.
+> 이진 탐색 트리의 삭제와 동일하지만 삭제할 노드의 색깔에 따라 트리의 구조를 바꾼다.
 
-- Red :
+> 삭제할 노드의 색이 Red일 경우 Red-Black tree의 특성을 위반하지 않기 때문에 Fix up 하지 않아도 된다
 
-> 만약 삭제할 노드가 자식 노드를 가지고 있지 않을 경우 그래도 삭제하면 된다.
+> 삭제할 노드의 색이 Black일 경우 Red-Black tree의 다음 특성을 위반할 가능성이 있다.
+ 
+- Root Property : 루트 노드의 색은 검정(Black)이다.
+- Internal Property : 빨강(Red) 노드의 자식은 검정(Black)이다.
+- Depth Property : External 노드의 경우 루트 부터 외부 노드까지 방문하는 블랙 노드의 수가 같다.
 
-> 자식 노드를 가지고 있을 경우 
+> 위 특성을 위반할 경우는 총 4가지로 나뉘며 수정하는 노드가 루트가 아니고 색이 검정이 아닐 때까지 계속 반복한다.
+
++ pseudocode
+
+![image](https://user-images.githubusercontent.com/94096054/144704462-79c8e120-38fd-4160-b783-e9a8e71224e8.png)
+
+
+![image](https://user-images.githubusercontent.com/94096054/144704441-9df070ee-5d23-4bd0-b103-693a195301c6.png)
+
+
++ code
+
+```
+void transplant(rbTree *t, Node *u, Node *v) {
+    if(u->parent == t->NIL)
+        t->root = v;
+    else if(u == u->parent->left)
+        u->parent->left = v;
+    else
+        u->parent->right = v;
+    v->parent = u->parent;
+}
+
+Node* minimum(rbTree *t, Node *x) {
+    while(x->left != t->NIL)
+        x = x->left;
+    return x;
+}
+
+void deleteFixup(rbTree *t, Node *x) {
+while(x != t->root && x->color == 'B') {
+  if(x == x->parent->left) {
+    Node *w = x->parent->right;
+    if(w->color == 'R') {
+      w->color = 'B';
+      x->parent->color = 'R';
+      leftRotate(t, x->parent);
+      w = x->parent->right;
+    }
+    if(w->left->color == 'B' && w->right->color == 'B') {
+      w->color = 'R';
+      x = x->parent;
+    }
+    else {
+      if(w->right->color == 'B') {
+        w->left->color = 'B';
+        w->color = 'R';
+        rightRotate(t, w);
+        w = x->parent->right;
+      }
+      w->color = x->parent->color;
+      x->parent->color = 'B';
+      w->right->color = 'B';
+      leftRotate(t, x->parent);
+      x = t->root;
+    }
+  }
+  else {
+    Node *w = x->parent->left;
+    if(w->color == 'R') {
+      w->color = 'B';
+      x->parent->color = 'R';
+      rightRotate(t, x->parent);
+      w = x->parent->left;
+    }
+    if(w->right->color == 'B' && w->left->color == 'B') {
+      w->color = 'R';
+      x = x->parent;
+    }
+    else {
+      if(w->left->color == 'B') {
+        w->right->color = 'B';
+        w->color = 'R';
+        leftRotate(t, w);
+        w = x->parent->left;
+      }
+      w->color = x->parent->color;
+      x->parent->color = 'B';
+      w->left->color = 'B';
+      rightRotate(t, x->parent);
+      x = t->root;
+    }
+  }
+}
+x->color = 'B';
+}
+
+void delete(rbTree *t, int data) {
+    
+    // if root is null -> z is root
+    Node *z;
+    Node *ty = t->NIL;
+    Node *tx = t->root;
+
+        //ordering
+    int check = 0;
+    while(tx != t->NIL){
+        if(data == tx->data){
+            z = tx;
+            break;
+        }
+        ty = tx;
+        if(data < tx->data){
+            tx = tx->left;
+        }
+        else if(data > tx->data){
+            tx = tx->right;
+        }
+        else{
+          return;
+        }
+    }
+    
+    
+    Node *y = z;
+    Node *x;
+    char origin_color = y->color;
+    if(z->left == t->NIL) {
+        x = z->right;
+        transplant(t, z, z->right);
+    }
+    else if(z->right == t->NIL) {
+      x = z->left;
+      transplant(t, z, z->left);
+    }
+    else {
+        y = minimum(t, z->right);
+        origin_color = y->color;
+        x = y->right;
+    if(y->parent == z) {
+        x->parent = z;
+    }
+    else {
+        transplant(t, y, y->right);
+        y->right = z->right;
+        y->right->parent = y;
+    }
+    transplant(t, z, y);
+    y->left = z->left;
+    y->left->parent = y;
+    y->color = z->color;
+    }
+    if(origin_color == 'B')
+        deleteFixup(t, x);
+}
+```
+
+
++ Case1 : 형제 노드(w)가 Red일 경우
+![image](https://user-images.githubusercontent.com/94096054/144704641-d9fbe82a-9ce2-4775-9df4-7d694acadfdf.png)
+
+> 지워야할 노드가 x라면 Depth Property를 위반하기 때문에 구조를 바꿔야 한다.
+
+> x의 부모노드와 형제 노드를 Recoloring하고, x의 부모 노드에서 left Rotate를 실행하여 구조를 변경한다.
+
+> 이후 나머지 case 2 ~ 4를 확인한다
+
++ Case2 : 형제 노드(w)가 Black이고 w의 자식들이 모두 Black일 경우
+![image](https://user-images.githubusercontent.com/94096054/144704969-370cda11-659b-4a8f-9572-acd806042105.png)
+
+> 마찬가지로 depth property를 위반하기 때문에 구조를 바꿔야 한다.
+
+> 단순하게 w의 색을 Red로 Recoloring하면 된다. 
+
+> 하지만 부모 노드의 색이 Red일 경우 문제가 생기기 때문에 Recoloring 하여 부모의 노드를 Black으로 바꾼다.
+
+
++ Case3 : 형제 노드(w)가 Black이고 w의 왼쪽 자식 노드만 Red일 경우 (삭제 노드가 부모 노드의 왼쪽 자식일 경우) 
+![image](https://user-images.githubusercontent.com/94096054/144704980-e29bc85c-082a-4b73-ba24-716e2d6d3781.png)
+
+> w를 right rotate를 하고 case 4로 넘어간다
+
++ Case4 : 형제 노드(w)가 Black이고 w의 오른쪽 자식 노드만 Red일 경우(삭제 노드가 부모 노드의 왼쪽 자식일 경우)
+![image](https://user-images.githubusercontent.com/94096054/144705434-401cec4c-5fd2-475a-9ad9-0b8b550ddce3.png)
+
+> 부모 노드와 형제 노드의 색을 바꾸고 left-Rotate를 시행한다. 이 때 노드를 삭제하고 트리의 특성에 맞다면 종료, 아니면 다시 시행한다.
+
 
 
 
