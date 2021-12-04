@@ -448,7 +448,14 @@ void delete(rbTree *t, int data) {
 
 > 부모 노드와 형제 노드의 색을 바꾸고 left-Rotate를 시행한다. 이 때 노드를 삭제하고 트리의 특성에 맞다면 종료, 아니면 다시 시행한다.
 
+
++ 중간 노드 삭제 : 
+
+> 중간에 존재하는 노드를 삭제할 경우 그 노드의 Successor를 찾아 그 값을 그대로 삭제할 노드에 저장하고 Successor 노드를 위의 4개의 Case에 따라 삭제한다
+
 참고 사이트 : http://shumin.co.kr/red-black-tree-%EC%82%AD%EC%A0%9C/
+
+
 
 
 
