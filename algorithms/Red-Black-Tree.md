@@ -437,14 +437,18 @@ void delete(rbTree *t, int data) {
 
 
 + Case3 : 형제 노드(w)가 Black이고 w의 왼쪽 자식 노드만 Red일 경우 (삭제 노드가 부모 노드의 왼쪽 자식일 경우) 
++ 
 ![image](https://user-images.githubusercontent.com/94096054/144704980-e29bc85c-082a-4b73-ba24-716e2d6d3781.png)
 
 > w를 right rotate를 하고 case 4로 넘어간다
 
 + Case4 : 형제 노드(w)가 Black이고 w의 오른쪽 자식 노드만 Red일 경우(삭제 노드가 부모 노드의 왼쪽 자식일 경우)
++ 
 ![image](https://user-images.githubusercontent.com/94096054/144705434-401cec4c-5fd2-475a-9ad9-0b8b550ddce3.png)
 
 > 부모 노드와 형제 노드의 색을 바꾸고 left-Rotate를 시행한다. 이 때 노드를 삭제하고 트리의 특성에 맞다면 종료, 아니면 다시 시행한다.
+
+참고 사이트 : http://shumin.co.kr/red-black-tree-%EC%82%AD%EC%A0%9C/
 
 
 
