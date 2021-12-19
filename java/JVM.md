@@ -21,9 +21,11 @@ JVM 동작 원리 및 기본 개념
 
 2) 컴파일된 바이트 코드를 JVM의 클래스 로더(Class Loader)에 전달한다.
 
-3) 클래스로더는 동적 로딩(Dynamic loading)을 통해 필요한 클래스들을 로딩 및 링크하여 런타임 데이터 영역(Runtime Data Area), 즉 JVM의 메모리에 올린다.
+3) 클래스로더는 동적 로딩(Dynamic loading)을 통해 필요한 클래스들을 로딩 및 링크하여 JVM의 메모리에 올린다.
 
-4) 실행 엔진(Execution Engine)은 JVM메모디에 올라온 바이트 코드들을 명령어 단위로 하나씩 가져와서 실행한다.
+4) 실행 엔진(Execution Engine)은 JVM 메모리에 올라온 바이트 코드들을 기계어로 해석한 후 명령어 단위로 하나씩 가져와서 실행한다.
+
+5) 해석된 바이트 코드들은 runtime data Area에 배치되어 실질적인 수행을 한다.
 
 
 
