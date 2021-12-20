@@ -1,7 +1,7 @@
 OSI 7 계층
 ==========
 
-* OSI(Open Systems Interconnection Reference Model)
+### OSI(Open Systems Interconnection Reference Model)
 
   + 국제표준화기구(ISO)에서 개발한 모델로, 컴퓨터 네트워크 프로토콜 디자인과 통신을 계층으로 나누어 설명한 것
 
@@ -14,7 +14,7 @@ OSI 7 계층
 
 ![image](https://user-images.githubusercontent.com/94096054/146776892-0d76fb15-7c88-492d-ab58-144c155339fe.png)
 
-1. 물리계층(Physical Layer)
+### 1. 물리계층(Physical Layer)
 
   + 물리적인 장치의 전기적, 기계적, 기능적인 특성을 이용하여 통신 케이블로 데이터를 전송
 
@@ -24,7 +24,7 @@ OSI 7 계층
   
   * Ex) 통신케이블, 리피터, 허브 등
 
-2. 데이터 링크 계층(Data Link Layer)
+### 2. 데이터 링크 계층(Data Link Layer)
 
   + 인접한 노드간의 신뢰성 있는 데이터 전송을 제어(Node to Node)
 
@@ -38,7 +38,7 @@ OSI 7 계층
 
   + Ex) 브릿지, 스위치
 
-3. 네트워크 계층(Network Layer)
+### 3. 네트워크 계층(Network Layer)
 
   + 종단간 전송을 위한 경로 설정을 담당(End-to-End)
 
@@ -50,7 +50,7 @@ OSI 7 계층
 
   + Ex) 라우터
 
-4. 전송 계층(Transport Layer)
+### 4. 전송 계층(Transport Layer)
 
   + 종단간 신뢰성 있는 데이터 전송을 담당
 
@@ -63,7 +63,7 @@ OSI 7 계층
   + 신뢰성 있는 데이터 전송을 위해 분할과 재조합, 연결제어, 흐름제어, 오류제어, 혼잡제어를 수행한다.
 
 
-5. 세션 계층(Session Layer)
+### 5. 세션 계층(Session Layer)
 
   + 데이터가 통신하기 위한 논리적인 연결
 
@@ -74,13 +74,13 @@ OSI 7 계층
   + TCP/IP 세션을 만들고 없애는 책임이 있음(3-way-handshake)
   
 
-6. 표현 계층(Presentation Layer)
+### 6. 표현 계층(Presentation Layer)
 
   + 데이터 표현방식(JPG, MP4..), 상이한 부호체계 간의 변화에 대해 규정
 
   + 인코딩/디코딩, 압축/해제, 암호화/복호화, 등의 역할을 수행
 
-7. 응용 계층(Application Layer)
+### 7. 응용 계층(Application Layer)
 
   + HTTP, FTP, SMTP, POP3, IMAP, Telnet 등과 같은 프로토콜이 있음
 
