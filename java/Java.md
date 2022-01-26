@@ -61,6 +61,37 @@ Java
 > JVM만 있다면 어떤 운영체제에서라도 실행할 수 있음
 
 
+* 람다 표현식
+
+> 메소드를 하나의 식으로 표현한 것
+
+> 식별자 없이 실행할 수 있는 함수 표현식
+
+* Ex)
+
+```
+new Thread(() -> {
+  System.out.println("this is lambda expression");
+}).start();
+```
+
+* Stream API
+
+> 자바에서는 많은 양의 데이터를 저장하기 위해서 배열이나 컬렉션을 사용하는데 
+
+> 저장된 데이터에 접근하기 위해서는 반복문이나 반복자(iterator)를 사용하여 코드를 작성한다. 
+
+> Stream API를 사용할 경우 데이터를 추상화아혀 다루므로, 다양한 방식으로 저장된 데이터를 읽고 쓰기 위한 공통된 방법을 제공한다.
+
+> 지연(Lazy) 연산을 통해 성능을 최적화 가능
+
+```
+String[] arr = new String[]{"하나", "둘", "셋", "넷"};
+
+Stream<String> stream1 = Arrays.stream(arr);
+stream1.forEach(e -> System.out.print(e + " ");
+
+```
 
 ## 자바 면접 예상 질문 리스트
 
