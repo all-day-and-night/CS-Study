@@ -91,7 +91,9 @@ Page
 
 ![image](https://user-images.githubusercontent.com/94096054/160322442-5776d808-f236-4cc9-bccd-100ca209e163.png)
 
-> swap out의 확률이 50%이므로 page fault 시 걸리는 시간은 (swap in + swap out * percent of swap out)
+> swap out의 확률이 50%이므로 page fault 시 걸리는 시간은 (swap in + swap out * percent of swap out) -> paging time
+
+> swap time인지 paging time인지 고려해서 계산해야 한다.
 
 
 
