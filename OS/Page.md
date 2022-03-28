@@ -104,6 +104,22 @@ Page
 
 > 실제 주소를 얻기 위한 메모리 주소 접근 한번과 데이터를 얻기 위한 또 한번의 접근이 필요
 
+* TLB Effective Access Time
+
+> 계산시 Page fault는 고려하지 않는다
+
+> TLB hit raio = P
+
+> EAT = P * hit memory access time + (1 - p) * miss memory access time
+
+> hit memory access time = TLB search + access memory time
+
+> miss memory access time = TLB search + page aceess time + access memory time(same as page access time)
+
+
+![image](https://user-images.githubusercontent.com/94096054/160324423-3a18fbcf-0bd3-46e7-adcf-ace83b11f9d1.png)
+
+
 
 
 
