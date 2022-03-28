@@ -83,8 +83,26 @@ Page
 
 > 테이블은 색인(페이지 번호)와 내용(해당 페이지에 할당된 물리 메모리)으로 구성
 
+* Effective Access Time
+
+> Page fault Rate = p
+
+> EAT = (1 - p) * memory access time + p * (page fault overhead + swap page out + swap page in + restart overhead)
+
+![image](https://user-images.githubusercontent.com/94096054/160322442-5776d808-f236-4cc9-bccd-100ca209e163.png)
+
+> swap out의 확률이 50%이므로 page fault 시 걸리는 시간은 (swap in + swap out * percent of swap out)
+
+
+
 ## TLB(Translation Look-aside Buffer, 변환 우선 참조 버퍼)
 
+
+> page table의 일종의 cache 
+
+> 페이지 테이블은 메인 메모리에 저장되기 때문에, 프로그램에 의한 모든 메모리 접근은 최소 두 번 필요하게 된다.
+
+> 실제 주소를 얻기 위한 메모리 주소 접근 한번과 데이터를 얻기 위한 또 한번의 접근이 필요
 
 
 
