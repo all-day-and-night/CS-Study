@@ -96,6 +96,55 @@ Java
 > 메모리를 관리하지 않아도 GC가 메모리를 관리해줌으로 쉽게 프로그래밍 할 수 있음
 
 
+* Java Runtime Data Area
+
+![image](https://user-images.githubusercontent.com/94096054/160544759-1a75c1e4-665c-4dea-b034-8d424c50e926.png)
+
+> JVM이 프로그램을 수행하기 위해 OS로부터 할당받는 메모리 영역
+
+> 다음과 같이 5개의 영역으로 구분된다.
+
+1. PC register
+
+  * Java의 PC register는 CPU 내의 register와 유사하지만 다르게 작동한다.
+
+  * (stack base vs Register base)
+
+  * 현재 수행 중인 JVM Instruction의 주소를 가진다.
+
+2. JVM stack
+
+  * Thead의 Method가 호출될 때 수행 정보(Method 호출 주소, 매개 변수, 지역 변수, 연산 스택)가 Frame이라는 단위로 JVM Stack에 저장
+
+3. Native method stack
+
+  * Java 외의 언어로 작성된 네이티브 코드들을 위한 stack
+
+4. Heap
+
+  * 모든 스레드가 공유
+
+  * 인스턴스와 배열이 동적으로 생성되는 공간
+
+  * Garbage Collector가 작동하는 영역
+
+  * 객체를 제거하기 위해 별도의 코드 작성이 불필요
+
+  * 동기화 문제 야기
+
+5. Method Area
+
+  * Class Loader가 적재한 클래스(또는 인터페이스)에 대한 메타데이터 정보가 저장
+
+  * 이 영역에 등록된 class만이 Heap에서 메모리 생성 가능
+
+  * 논리적으로 Heap에 포함
+  * 
+
+> PC register, JVM stack, Native method stack은 각각의 스레드에 독립적으로 할당받는 메모리
+
+> Heap, Method Area는 모든 Thread가 공유
+
 
 
 * 람다 표현식
