@@ -93,6 +93,9 @@ Scheduler
 
   + response time을 줄이기 위해 선점형 스케줄러와 time quantum 기법을 사용
 
+![image](https://user-images.githubusercontent.com/94096054/160602449-ffe1d584-1785-49c6-96b8-4f317a511cb4.png)
+
+
 ### 스케줄링 종류
 
 #### FCFS(First Come First Served)
